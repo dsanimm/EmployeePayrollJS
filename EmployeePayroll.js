@@ -27,6 +27,7 @@ let totalHoursInMonth = 0;
 let totalWorkingDays = 0;
 let dailyWageArr = new Array();
 let dailyWageMap = new Map();
+let dailyHourMap = new Map();
 while (totalWorkingDays < WORKING_DAYS_IN_MONTH && totalHoursInMonth < WORKING_HOURS_IN_MONTH) {
     totalWorkingDays++;
     empCheck = Math.floor(Math.random() * 10) % 3;
@@ -34,6 +35,7 @@ while (totalWorkingDays < WORKING_DAYS_IN_MONTH && totalHoursInMonth < WORKING_H
     let dailyWage = calculateWage(dailyHours);
     dailyWageArr.push(dailyWage);
     dailyWageMap.set(totalWorkingDays, dailyWage);
+    dailyHourMap.set(totalWorkingDays, dailyHours);
     totalHoursInMonth += dailyHours;
 }
 console.log('Employee Total Wage In A Month : ' + totalHoursInMonth * EMP_WAGE_PER_HOUR + ' Working Days : ' + totalWorkingDays);
@@ -90,3 +92,25 @@ function totalDaysWorked(numberOfDays, dailyWage) {
     return numberOfDays;
 }
 console.log('The Number Of Days Employee Worked Part Time or Full Time : ' + dailyWageArr.reduce(totalDaysWorked, 0));
+
+//UC 9 : Usage of Arrow Fuctions
+//we are going to use the totatWages function defined above in calculations
+let count = 0;
+let totalHours = Array.from(dailyHourMap.values()).reduce(totalWages, 0);
+let totalSalary = dailyWageArr.filter(dailyWage => dailyWage > 0).reduce(totalWages, 0);
+console.log('Emp Wage With Arrow Function : ' + " Total Wages : " + totalSalary + " Total Hours Worked : " + totalHours);
+let notWorkingDays = new Array();
+let partWorkingDays = new Array();
+let fullWorkingDays = new Array();
+dailyHourMap.forEach((value, key) => {
+    if (value == 0) {
+        notWorkingDays.push(key);
+    } else if (value == 4) {
+        partWorkingDays.push(key);
+    } else if (value == 8) {
+        fullWorkingDays.push(key);
+    }
+});
+console.log('Not Working Days : ' + notWorkingDays);
+console.log('Part Working Days : ' + partWorkingDays);
+console.log('Full Working Days : ' + fullWorkingDays);
