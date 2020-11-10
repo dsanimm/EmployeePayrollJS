@@ -1,4 +1,3 @@
-
 //UC6 calculates the monthly wage and storing it in array UC8 map
 const IS_ABSENT = 0;
 const IS_PART_TIME = 1;
@@ -128,3 +127,25 @@ dailyHourMap.forEach((value, key) => {
 console.log('Not Working Days : ' + notWorkingDays);
 console.log('Part Working Days : ' + partWorkingDays);
 console.log('Full Working Days : ' + fullWorkingDays);
+
+//UC11 : Obejct Operations using Array functions 
+let totalWageObject = empDailyWageAndHrsArr.filter(dailyDetails => dailyDetails.dailyWage > 0)
+    .reduce((totalWage, dailyDetails) => totalWage += dailyDetails.dailyWage, 0);
+let totalHoursObject = empDailyWageAndHrsArr.filter(dailyDetails => dailyDetails.dailyWage > 0)
+    .reduce((totalHour, dailyDetails) => totalHour += dailyDetails.dailyHour, 0);
+console.log('Employee Total Wage Using Objects : ' + totalWageObject + ' Total Hours : ' + totalHoursObject);
+process.stdout.write("Logging Full Working Days : ")
+empDailyWageAndHrsArr.filter(dailyDetails => dailyDetails.dailyHour == 8)
+    .forEach(dailyDetails => process.stdout.write(dailyDetails.toString()));
+process.stdout.write("\n Logging Part Working Days : ")
+empDailyWageAndHrsArr.filter(dailyDetails => dailyDetails.dailyHour == 4)
+    .forEach(dailyDetails => process.stdout.write(dailyDetails.toString()));
+process.stdout.write("\n Logging Non Working Days : ")
+empDailyWageAndHrsArr.filter(dailyDetails => dailyDetails.dailyHour == 0)
+    .forEach(dailyDetails => process.stdout.write(dailyDetails.toString()));
+let partWorkingArr = empDailyWageAndHrsArr.filter(dailyDetails => dailyDetails.dailyHour == 4)
+    .map(dailyDetails => dailyDetails.toString());
+console.log('\nPart Working Day String Array : ' + partWorkingArr);
+let nonWorkingDayNumbers = empDailyWageAndHrsArr.filter(dailyDetails => dailyDetails.dailyHour == 0)
+    .map(empDetails => empDetails.dayNumber);
+console.log('Non Working Day Nums : ' + nonWorkingDayNumbers);
