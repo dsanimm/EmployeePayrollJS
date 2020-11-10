@@ -73,10 +73,10 @@ class EmployeePayrollData {
     }
 }
 
-let empData = new EmployeePayrollData(1, "Yudhajit", 50000, "F", new Date("May 13, 1998 12:00:00"));
+let empData = new EmployeePayrollData(1, "Deepanshu", 10000, "M", new Date("May 13, 1998 12:00:00"));
 console.log(empData.toString());
 try {
-    empData.name = "Yudha";
+    empData.name = "Deepanshu";
     empData.id = 1;
     empData.salary = 100000;
     empData.gender = "M";
@@ -85,5 +85,5 @@ try {
 } catch (e) {
     console.log(e);
 }
-let empData2 = new EmployeePayrollData(2, "Kiran", 60000, "M", new Date());
+let empData2 = new EmployeePayrollData(2, "Kiran", 60000, "F", new Date());
 console.log(empData2.toString());
