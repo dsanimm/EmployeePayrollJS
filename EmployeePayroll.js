@@ -1,3 +1,4 @@
+
 //UC6 calculates the monthly wage and storing it in array UC8 map
 const IS_ABSENT = 0;
 const IS_PART_TIME = 1;
@@ -28,6 +29,7 @@ let totalWorkingDays = 0;
 let dailyWageArr = new Array();
 let dailyWageMap = new Map();
 let dailyHourMap = new Map();
+let empDailyWageAndHrsArr = new Array();
 while (totalWorkingDays < WORKING_DAYS_IN_MONTH && totalHoursInMonth < WORKING_HOURS_IN_MONTH) {
     totalWorkingDays++;
     empCheck = Math.floor(Math.random() * 10) % 3;
@@ -36,11 +38,23 @@ while (totalWorkingDays < WORKING_DAYS_IN_MONTH && totalHoursInMonth < WORKING_H
     dailyWageArr.push(dailyWage);
     dailyWageMap.set(totalWorkingDays, dailyWage);
     dailyHourMap.set(totalWorkingDays, dailyHours);
+    empDailyWageAndHrsArr.push(
+        {
+            dayNumber: totalWorkingDays,
+            dailyHour: dailyHours,
+            dailyWage: dailyWage,
+            toString() {
+                return '\n Day' + this.dayNumber + ' => Working Hour is : ' + this.dailyHour + ' And Wage Earned : ' + this.dailyWage;
+            },
+        }
+    );
     totalHoursInMonth += dailyHours;
 }
 console.log('Employee Total Wage In A Month : ' + totalHoursInMonth * EMP_WAGE_PER_HOUR + ' Working Days : ' + totalWorkingDays);
 console.log(dailyWageArr);
 console.log('Employee Total Wage From The Map : ' + Array.from(dailyWageMap.values()).reduce(totalWages, 0));
+//UC 10 : Object of Daily Details
+console.log(' The Daily Detais Of the Employee are : \n' + empDailyWageAndHrsArr);
 
 //UC7A
 let totalEmpWage = 0;
