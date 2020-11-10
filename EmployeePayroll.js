@@ -1,4 +1,4 @@
-//UC6 calculates the monthly wage and storing it in array
+//UC6 calculates the monthly wage and storing it in array UC8 map
 const IS_ABSENT = 0;
 const IS_PART_TIME = 1;
 const IS_FULL_TIME = 2;
@@ -26,16 +26,19 @@ function calculateWage(empHrs) {
 let totalHoursInMonth = 0;
 let totalWorkingDays = 0;
 let dailyWageArr = new Array();
+let dailyWageMap = new Map();
 while (totalWorkingDays < WORKING_DAYS_IN_MONTH && totalHoursInMonth < WORKING_HOURS_IN_MONTH) {
     totalWorkingDays++;
     empCheck = Math.floor(Math.random() * 10) % 3;
     let dailyHours = getDailyEmployeeHours(empCheck);
     let dailyWage = calculateWage(dailyHours);
     dailyWageArr.push(dailyWage);
+    dailyWageMap.set(totalWorkingDays, dailyWage);
     totalHoursInMonth += dailyHours;
 }
 console.log('Employee Total Wage In A Month : ' + totalHoursInMonth * EMP_WAGE_PER_HOUR + ' Working Days : ' + totalWorkingDays);
 console.log(dailyWageArr);
+console.log('Employee Total Wage From The Map : ' + Array.from(dailyWageMap.values()).reduce(totalWages, 0));
 
 //UC7A
 let totalEmpWage = 0;
