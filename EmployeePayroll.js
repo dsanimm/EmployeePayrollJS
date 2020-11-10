@@ -1,4 +1,4 @@
-//UC5 calculates the monthly wage for conditions
+//UC6 calculates the monthly wage and storing it in array
 const IS_ABSENT = 0;
 const IS_PART_TIME = 1;
 const IS_FULL_TIME = 2;
@@ -36,3 +36,54 @@ while (totalWorkingDays < WORKING_DAYS_IN_MONTH && totalHoursInMonth < WORKING_H
 }
 console.log('Employee Total Wage In A Month : ' + totalHoursInMonth * EMP_WAGE_PER_HOUR + ' Working Days : ' + totalWorkingDays);
 console.log(dailyWageArr);
+
+//UC7A
+let totalEmpWage = 0;
+function sum(dailyWage) {
+    totalEmpWage += dailyWage;
+}
+dailyWageArr.forEach(sum);
+console.log('Total Wage Calculated Using For Each : ' + totalEmpWage);
+function totalWages(totalWage, dailyWage) {
+    return totalWage + dailyWage;
+}
+console.log('Total Wage Calculated Using Reduce : ' + dailyWageArr.reduce(totalWages, 0));
+
+//UC7B
+let dayCounter = 0;
+function mapDayWithDailyWage(dailyWage) {
+    dayCounter++;
+    return dayCounter + " = " + dailyWage;
+}
+let mapDayWithDailyWageArr = dailyWageArr.map(mapDayWithDailyWage);
+console.log('Day With Daily Wage Map ');
+console.log(mapDayWithDailyWageArr);
+
+//UC7C
+function isFullTimeWage(dailyWage) {
+    return dailyWage.includes("160");
+}
+let fullDayWageMapArr = mapDayWithDailyWageArr.filter(isFullTimeWage);
+console.log('Days When Full Time Wage is Earned : ');
+console.log(fullDayWageMapArr);
+
+//UC7D
+console.log('The Day When Full Time Wage is First Earned : ' + mapDayWithDailyWageArr.find(isFullTimeWage));
+
+//UC7E
+console.log('Is Full Time Wage For All Day Truely Contains Full Time Wage : ' + fullDayWageMapArr.every(isFullTimeWage));
+
+//UC7F
+function isPartTimeWage(dailyWage) {
+    return dailyWage.includes("80");
+}
+console.log('Is Employee Earned Any Part Time Wage : ' + mapDayWithDailyWageArr.some(isPartTimeWage));
+
+//UC7G
+function totalDaysWorked(numberOfDays, dailyWage) {
+    if (dailyWage > 0) {
+        return numberOfDays + 1;
+    }
+    return numberOfDays;
+}
+console.log('The Number Of Days Employee Worked Part Time or Full Time : ' + dailyWageArr.reduce(totalDaysWorked, 0));
