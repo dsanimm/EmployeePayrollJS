@@ -1,10 +1,4 @@
 class EmployeePayrollData {
-    //Properties
-    id;
-    salary;
-    gender;
-    startDate;
-
     //Constructor
     constructor(...params) {
         this.id = params[0];
@@ -26,6 +20,49 @@ class EmployeePayrollData {
             throw 'Name is in Incorrect Format';
         }
     }
+    get id() {
+        return this._id;
+    }
+    set id(id) {
+        let idRegex = RegExp('^[1-9]{1}[0-9]*');
+        if (idRegex.test(id)) {
+            this._id = id;
+        } else {
+            throw 'id is in Incorrect Format';
+        }
+    }
+    get salary() {
+        return this._salary;
+    }
+    set salary(salary) {
+        let salaryRegex = RegExp('^[1-9]{1}[0-9]*');
+        if (salaryRegex.test(salary)) {
+            this._salary = salary;
+        } else {
+            throw 'Salary is in Incorrect Format';
+        }
+    }
+    get gender() {
+        return this._gender;
+    }
+    set gender(gender) {
+        let genderRegex = RegExp('[MF]');
+        if (genderRegex.test(gender)) {
+            this._gender = gender;
+        } else {
+            throw 'Gender is in Incorrect Format';
+        }
+    }
+    get startDate() {
+        return this._startDate;
+    }
+    set startDate(startDate) {
+        if (startDate < new Date("November 10, 2020 12:00:00")) {
+            this._startDate = startDate;
+        } else {
+            throw 'Date is in Incorrect Format';
+        }
+    }
 
     //Methods
     toString() {
@@ -36,10 +73,14 @@ class EmployeePayrollData {
     }
 }
 
-let empData = new EmployeePayrollData(1, "Deepanshu", 10000);
+let empData = new EmployeePayrollData(1, "Yudhajit", 50000, "F", new Date("May 13, 1998 12:00:00"));
 console.log(empData.toString());
 try {
-    empData.name = "Deepanshu Singh";
+    empData.name = "Yudha";
+    empData.id = 1;
+    empData.salary = 100000;
+    empData.gender = "M";
+    empData.startDate = new Date();
     console.log(empData.toString());
 } catch (e) {
     console.log(e);
